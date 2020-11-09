@@ -70,10 +70,10 @@ def bib2csv(bib_file, csv_file):
     # set the output filename
     # if csv_file == None:
     #     csv_file = os.path.splitext(bib_file)[0] + '.csv'
-    f = open(csv_file, 'a')
+    f = open(csv_file, "a")
     # check if bib input file exists
     if not os.path.isfile(bib_file):
-        print('The file specified does not exist')
+        print("The file specified does not exist")
         sys.exit()
 
     if not args.headless:
@@ -82,7 +82,7 @@ def bib2csv(bib_file, csv_file):
         f.write("author\t year\t title\t journal\t doi\n")
 
     # translator for removing punctuation
-    translator = str.maketrans('', '', string.punctuation)
+    translator = str.maketrans("", "", string.punctuation)
 
     bib_parser = bibtex.Parser()
 
@@ -121,7 +121,7 @@ def bib2csv(bib_file, csv_file):
         if "journal" in b:
             journal_name = b["journal"]
             # convert journal abbreviations
-            if journal_name[0] == '\\':
+            if journal_name[0] == "\\":
                 journal_name = journals[journal_name[1:]]
             journal_tuple.append(journal_name)
         # search for journal's related fields
@@ -141,16 +141,30 @@ def bib2csv(bib_file, csv_file):
     f.close()
 
 
-arg_parser = argparse.ArgumentParser(description="Covert '.bib' files into '.csv' files."
-                                                 "Default output: same name and location of the 'bib' input file")
-arg_parser.add_argument('bib_file', default="sample.bib", nargs='*',
-                        help='file with .bib extension to convert')
-arg_parser.add_argument('-o', '--output', nargs='?',
-                        help="output file with '.bib' extension."
-                             "If multiple input files are defined,"
-                             "they will be merged into it.")
-arg_parser.add_argument('-H', '--headless', action='store_true',
-                        help='do not generate the first row with the headers')
+arg_parser = argparse.ArgumentParser(
+    description="Covert '.bib' files into '.csv' files."
+    "Default output: same name and location of the 'bib' input file"
+)
+arg_parser.add_argument(
+    "bib_file",
+    default="sample.bib",
+    nargs="*",
+    help="file with .bib extension to convert",
+)
+arg_parser.add_argument(
+    "-o",
+    "--output",
+    nargs="?",
+    help="output file with '.bib' extension."
+    "If multiple input files are defined,"
+    "they will be merged into it.",
+)
+arg_parser.add_argument(
+    "-H",
+    "--headless",
+    action="store_true",
+    help="do not generate the first row with the headers",
+)
 args = arg_parser.parse_args()
 
 first_run = True
@@ -166,7 +180,7 @@ for input_file in args.bib_file:
         elif not first_run:
             args.headless = True
     else:
-        output = os.path.splitext(input_file)[0] + '.csv'
+        output = os.path.splitext(input_file)[0] + ".csv"
         if os.path.exists(output):
             os.remove(output)
     bib2csv(input_file, output)
