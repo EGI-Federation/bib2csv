@@ -13,13 +13,13 @@ spreadsheet with few defined columns:
 |   |   |   |   |   |
 |   |   |   |   |   |
 
-This information can be downloaded as a `${filename}.bib` form websites like
+This information can be downloaded as a `${filename}.bib` from websites like
 [https://inspirehep.net/](https://inspirehep.net)
 and
 [https://ui.adsabs.harvard.edu/](https://ui.adsabs.harvard.edu/)
-but they need to be converted and the list can be composed of few thousands of entries.
+but they need to be converted and the list can be composed of a few thousand entries.
 The script is built around the specific requirements converting and reordering just
-the required fields and merging several filed in the `Source` column.
+the required fields and merging several others in the `Source` column.
 It accepts incomplete tuples to avoid losing information.
 
 ## Install requirements
@@ -53,5 +53,5 @@ with `-o`:
 ./bib2csv ${flename1}.md ${flename2}.md -o $%{outputfile.csv}
 ```
 
-To remove the first line with the header
-to make copy and paste quicker with the option `-h`.
+To remove the first line containing the header specify the option `-H`,
+will make the copy and paste quicker.
